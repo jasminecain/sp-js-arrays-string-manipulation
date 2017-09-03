@@ -3,50 +3,56 @@ let submitBtn  = document.getElementById('submit-button');
 let inputField = document.getElementById('input-field');
 // var testString = "";
 
-
-
+// !/^[a-zA-Z]*$/g  includes a to z;lower case/upper case !excludes: numbers, blank spaces, & symbols
+function validate(value) {
+  if (!/^[a-zA-Z]*$/g.test(value)) {
+      alert("Invalid characters, text only!");
+      return false;
+  }
+  return true;
+}
 
 document.getElementById('submit-button');
 
 submitBtn.addEventListener('click', function(event) {
   let inputValue = inputField.value;
-  console.log('input value', inputValue);
-  outputArea.innerHTML = inputValue;
 
-  reversal(inputField.value);
-  alphabits(inputField.value);
-  palindrome(inputField.value);
+  if (validate(inputValue)) {
+    console.log('input value', inputValue);
+    outputArea.innerHTML = inputValue;
+
+    reversal(inputValue);
+    alphabits(inputValue);
+    palindrome(inputValue);
+  }
 });
 
-input.addEventListener('keyup', function(event) {
+inputField.addEventListener('keyup', function(event) {
   if (event.keyCode === 13) {
-    let inputfield = input.value;
-    outputArea.innerHTML = inputfield;
+    let inputValue = inputField.value;
+    if (validate(inputValue)) {
+      outputArea.innerHTML = inputValue;
 
-    reversal(inputField.value);
-    alphabits(inputField.value);
-    palindrome(inputField.value);
+      reversal(inputValue);
+      alphabits(inputValue);
+      palindrome(inputValue);
+    }
   }
 });
 
 
 function reversal(testString) {
 
-  return testString.split("").reverse().join("")
-
-	document.getElementById("reverse").innerHTML = `${testString}`;
+	document.getElementById("reverse").innerHTML = `${testString.split("").reverse().join("")}`;
 }
 
-function alphabits() {
+function alphabits(testString) {
 
-  return testString.split("").reverse().join("")
-
-  document.getElementById("alphabetize").innerHTML = `${testString}`;
+  document.getElementById("alphabetize").innerHTML = `${testString.split("").reverse().join("")}`;
 }
 
-function palindrome() {
+function palindrome(testString) {
 
-  return testString.split("").reverse().join("")
-
-  document.getElementById("palindrome").innerHTML = `${testString}`;
+  document.getElementById("palindrome").innerHTML = `${testString.split("").reverse().join("")}`;
 }
+//Palindrome: word, phrase, number, or other sequence of characters which reads the same backward as forward
